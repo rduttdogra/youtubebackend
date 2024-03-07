@@ -1,13 +1,27 @@
 //require('dotenv').config({path: './env'}) // its not looking like module structure
 import dotenv from "dotenv"
 import connectDB from "./db/index.js";
+import { app } from "./app.js";
 
 dotenv.config({
     path: "./env"
 })
 
+const port = process.env.PORT || 8000;
 
-connectDB();
+connectDB()
+.then(() => {
+    app.on("error", (err) => {
+        console.error(`Server error: `, err);
+    })
+    
+    app.listen(port, () => {
+        console.log(`Server is runing at port: ${port}`);
+    })
+})
+.catch((err) => {
+    console.log(`MONGODB connection failed: ${err}`);
+})
 
 
 
