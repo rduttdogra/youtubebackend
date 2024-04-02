@@ -24,7 +24,9 @@ const uploadOnCloudinary = async (localFilePath) => {
          );
 
          //file has been uploaded sucessfully
-         console.log('response ulr: ', response.url);
+         //console.log('cloudinary response', response)
+         //console.log('response ulr: ', response.url);
+         fs.unlinkSync(localFilePath)
          return response;
         
     } catch (error) {
